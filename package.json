@@ -1,0 +1,125 @@
+{
+  "name": "semtab",
+  "displayName": "semtab",
+  "description": "Allows tabbing through parsed semantic elements of your code",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haikuginger/semtab.git"
+  },
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "semtab.nextToken",
+        "title": "Next Token"
+      },
+      {
+        "command": "semtab.previousToken",
+        "title": "Previous Token"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "semtab.nextToken",
+        "key": "alt+k",
+        "mac": "alt+k"
+      },
+      {
+        "command": "semtab.previousToken",
+        "key": "alt+j",
+        "mac": "alt+j"
+      }
+    ],
+    "configuration": {
+      "title": "SemTab Extension",
+      "properties": {
+        "semTab.relevantScopes": {
+          "type": "array",
+          "default": [
+            "constant",
+            "entity",
+            "variable",
+            "storage.modifier",
+            "meta.type",
+            "meta.function",
+            "meta.item-access.arguments",
+            "meta.parameters",
+            "meta.function-call",
+            "meta.indexed-name",
+            "support.type",
+            "support.variable",
+            "source",
+            "meta.attribute",
+            "support.function",
+            "string.quoted",
+            "keyword.operator"
+          ],
+          "description": "TextMate scope selectors whose tokens SemTab should land on"
+        },
+        "semTab.excludeScopes": {
+          "type": "array",
+          "default": [
+            "punctuation",
+            "constant.character.escape",
+            "keyword.operator.assignment"
+          ],
+          "description": "TextMate scope selectors whose tokens SemTab should skip over, even if they have another scope that's relevant"
+        },
+        "semTab.zeroWidthLandings": {
+          "type": "array",
+          "default": [
+            "punctuation.definition.arguments.end",
+            "punctuation.definition.parameters.end",
+            "punctuation.definition.array.end",
+            "punctuation.definition.list.end"
+          ],
+          "description": "TextMate scope selectors whose tokens SemTab should insert a cursor immediately before"
+        },
+        "semTab.debugLog": {
+          "type": "boolean",
+          "default": false,
+          "description": "Run logging in verbose mode to inspect why semtab might be skipping some symbols"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "lint-fix": "eslint --fix src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.100.0",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.5.2",
+    "esbuild": "^0.25.3",
+    "eslint": "^9.25.1",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "vscode-textmate-languageservice": "^4.0.0"
+  }
+}

@@ -6,6 +6,7 @@
     "type": "git",
     "url": "git+https://github.com/haikuginger/semtab.git"
   },
+  "publisher": "x86-wtf",
   "version": "1.0.0",
   "engines": {
     "vscode": "^1.100.0"

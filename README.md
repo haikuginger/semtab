@@ -53,7 +53,9 @@ file. It works fine for localized moves.
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 1.0.1
+
+Increased compatibility with past versions of VS Code
 
 ### 1.0.0
 
